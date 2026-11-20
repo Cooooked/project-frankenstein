@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Frankenstein — Evolve Diablo Carbon Engineering</title>
+<meta name="description" content="Project Frankenstein: engineering log of an Evolve Diablo Carbon — performance experimentation, controller and battery engineering, and a planned reversible high-voltage conversion.">
+<link rel="icon" href="assets/logo.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <a class="nav__brand" href="#top">
+    <img src="assets/logo.webp" alt="Project Frankenstein logo" width="44" height="25">
+    <span>PROJECT&nbsp;FRANKENSTEIN</span>
+  </a>
+  <nav class="nav__links" id="navLinks">
+    <a href="#board">The Board</a>
+    <a href="#software">The Approach</a>
+    <a href="#build">The Build</a>
+    <a href="#log">The Log</a>
+    <a href="#status">Status</a>
+  </nav>
+  <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="nav__cta" href="#status">ACTIVE BUILD</a>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero__bg" style="background-image:url('assets/hero-ride.webp')"></div>
+  <div class="hero__shade"></div>
+  <div class="hero__inner">
+    <p class="hero__kicker reveal">EVOLVE DIABLO CARBON · GROUND-UP ENGINEERING LOG</p>
+    <h1 class="hero__title reveal">PROJECT<br>FRANKENSTEIN</h1>
+    <p class="hero__sub reveal">A stock Evolve Diablo Carbon, taken apart at the engineering level,
+    understood before it's modified — with a reversible high-voltage conversion on the bench.</p>
+    <div class="hero__actions reveal">
+      <a class="btn btn--red" href="#build">See the build plan</a>
+      <a class="btn btn--ghost" href="#log">Read the log</a>
+    </div>
+    <ul class="hero__stats reveal">
+      <li><strong>~78</strong><span>km/h with field weakening</span></li>
+      <li><strong>48</strong><span>cells, rearranged 12S4P → 16S3P</span></li>
+      <li><strong>100%</strong><span>reversible to stock</span></li>
+    </ul>
+  </div>
+  <a class="hero__scroll" href="#board" aria-label="Scroll"><span></span></a>
+</section>
+
+<!-- ============ TICKER ============ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track">
+    <span>12S4P SAMSUNG 40T → 16S3P MOLICEL P50B</span><i>◆</i>
+    <span>EFOC 2.0 → MAKERX D100S VESC</span><i>◆</i>
+    <span>DUAL 6374 MOTORS — RETAINED</span><i>◆</i>
+    <span>FIELD WEAKENING — MAPPED &amp; VERIFIED</span><i>◆</i>
+    <span>PHAZE REMOTE — COMPATIBILITY STUDY</span><i>◆</i>
+    <span>STOCK HARDWARE PRESERVED</span><i>◆</i>
+    <span>12S4P SAMSUNG 40T → 16S3P MOLICEL P50B</span><i>◆</i>
+    <span>EFOC 2.0 → MAKERX D100S VESC</span><i>◆</i>
+    <span>DUAL 6374 MOTORS — RETAINED</span><i>◆</i>
+    <span>FIELD WEAKENING — MAPPED &amp; VERIFIED</span><i>◆</i>
+    <span>PHAZE REMOTE — COMPATIBILITY STUDY</span><i>◆</i>
+    <span>STOCK HARDWARE PRESERVED</span><i>◆</i>
+  </div>
+</div>
+
+<!-- ============ THE BOARD ============ -->
+<section class="section" id="board">
+  <div class="section__head reveal">
+    <p class="section__index">01 / THE DONOR</p>
+    <h2>The Board</h2>
+    <p class="section__lede">Everything starts from one machine: a stock Evolve Diablo Carbon —
+    and a determination to know exactly what it can do.</p>
+  </div>
+  <div class="split">
+    <figure class="split__media reveal">
+      <img src="assets/board-chassis.webp" alt="The Frankenstein board beside a spare carbon Diablo chassis" loading="lazy">
+      <figcaption>The hybrid board next to the spare carbon Diablo chassis prepared for Stage 1.</figcaption>
+    </figure>
+    <div class="split__body">
+      <div class="spec-grid reveal">
+        <div class="spec"><span class="spec__k">Battery</span><span class="spec__v">12S4P · Samsung 21700-40T · 16 Ah</span></div>
+        <div class="spec"><span class="spec__k">Motors</span><span class="spec__v">Dual 6374-class outrunners</span></div>
+        <div class="spec"><span class="spec__k">Controller</span><span class="spec__v">Evolve EFOC 2.0</span></div>
+        <div class="spec"><span class="spec__k">Remote</span><span class="spec__v">Evolve Phaze</span></div>
+        <div class="spec"><span class="spec__k">Gearing</span><span class="spec__v">16T pinion · 32T wheel · ~107 mm poly</span></div>
+        <div class="spec"><span class="spec__k">Observed</span><span class="spec__v">~70 km/h stock · ~78 km/h field-weakened</span></div>
+      </div>
+      <p class="reveal">The board arrived already unusual: a factory one-off hybrid — Diablo controller
+      internals and 3500&nbsp;W motors grafted into a Hadean battery enclosure, with custom BMS firmware
+      so the two generations could talk. Six years and roughly 10,000&nbsp;km on Evolve hardware
+      (Stoke → GTR Gen 1 → Hadean → Diablo) is what made "just a skateboard" insufficient.</p>
+      <p class="reveal">At ESRA Nationals in Coffs Harbour, pushing stock hardware against custom race
+      builds exposed the real ceiling: battery sag and voltage, not rider input. That is the problem
+      Frankenstein exists to solve.</p>
+    </div>
+  </div>
+  <figure class="wide reveal">
+    <img src="assets/esra-pitlane.webp" alt="ESRA Nationals pit lane at Coffs Harbour" loading="lazy">
+    <figcaption>ESRA Nationals pit lane — riders on 15-minute fast-charge turnarounds while stock hardware was pushed to its limit.</figcaption>
+  </figure>
+</section>
+
+<!-- ============ APPROACH ============ -->
+<section class="section section--alt" id="software">
+  <div class="section__head reveal">
+    <p class="section__index">02 / THE APPROACH</p>
+    <h2>Understand Before You Modify</h2>
+    <p class="section__lede">No black boxes. Before a single part was swapped, the board's behaviour was
+    mapped through its own diagnostics — custom tooling built in-house, on both mobile and desktop.</p>
+  </div>
+
+  <div class="cards cards--3 reveal">
+    <article class="card">
+      <span class="card__tag card__tag--done">DONE</span>
+      <h3>Tuning &amp; Telemetry</h3>
+      <p>Custom mobile tooling for live controller tuning and logging — field weakening, current limits,
+      speed references and protection thresholds, all verified with read-back before a ride.</p>
+      <ul class="card__list">
+        <li>Stationary safety checks before every write</li>
+        <li>Live battery group sag &amp; recovery logging</li>
+        <li>Tune-versus-speed comparison runs</li>
+      </ul>
+    </article>
+    <article class="card">
+      <span class="card__tag card__tag--done">DONE</span>
+      <h3>Workshop Diagnostics</h3>
+      <p>A desktop diagnostic suite for the workshop bench — controller and battery telemetry side by
+      side, persistent session logbook, and exportable reports for the technical record.</p>
+      <ul class="card__list">
+        <li>Simultaneous controller + battery links</li>
+        <li>Cell voltages, temperatures, fault history</li>
+        <li>Strictly read-only over Bluetooth</li>
+      </ul>
+    </article>
+    <article class="card">
+      <span class="card__tag card__tag--active">ACTIVE</span>
+      <h3>Remote Compatibility</h3>
+      <p>Ongoing study of keeping the Phaze remote working through the conversion — protocol analysis
+      and a microcontroller BLE bridge are the active workstreams.</p>
+      <ul class="card__list">
+        <li>Remote communication fully mapped</li>
+        <li>nRF52840 bridge in development</li>
+        <li>16S battery-display constraint identified</li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="split split--rev">
+    <div class="split__body">
+      <h3 class="subhead reveal">What the investigation established</h3>
+      <ul class="checklist reveal">
+        <li>Field weakening is a bounded control loop, not a magic number — its limits, scaling and
+        protection thresholds are measured and documented.</li>
+        <li>Tuning changes live in volatile memory — a power-cycle returns the board to factory
+        behaviour. Nothing permanent without a deliberate flash.</li>
+        <li>The battery's real weakness is dynamic: cell groups that look balanced at rest sag
+        measurably under load — invisible without live logging.</li>
+        <li>The remote's battery display has a hard ceiling above 65.5&nbsp;V — a genuine design
+        constraint any 16S conversion must respect.</li>
+      </ul>
+      <p class="note reveal"><strong>Honest boundary:</strong> this is a personal research project.
+      Findings are specific to this board's firmware revision and configuration — not a product
+      specification, and not endorsed by Evolve.</p>
+    </div>
+    <div class="split__media reveal">
+      <img src="assets/drivetrain.webp" alt="Dual-motor drivetrain inside the board enclosure" loading="lazy">
+      <img src="assets/teardown.webp" alt="Battery enclosure teardown showing cell sleeve wear" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE BUILD ============ -->
+<section class="section" id="build">
+  <div class="section__head reveal">
+    <p class="section__index">03 / THE MACHINE</p>
+    <h2>The Conversion</h2>
+    <p class="section__lede">Stage 1 breaks the voltage ceiling while keeping the Evolve soul.
+    Stage 2 is designed for whatever comes after. The factory deck stays uncut.</p>
+  </div>
+
+  <div class="stage reveal">
+    <div class="stage__head">
+      <span class="stage__num">STAGE 1</span>
+      <h3>16S3P · Molicel P50B · D100S VESC</h3>
+      <span class="card__tag card__tag--active">IN PROGRESS</span>
+    </div>
+    <div class="stage__grid">
+      <article class="part">
+        <h4>Battery — Marsen Energy 16S3P P50B</h4>
+        <p>Same 48 cells rearranged: 12S4P → 16S3P Molicel P50B.
+        67.2&nbsp;V peak / 57.6&nbsp;V nominal — a +33% voltage boost with dramatically lower sag,
+        in the exact Diablo tray volume.</p>
+        <span class="part__status">PROPOSED — pack design agreed, build pending</span>
+      </article>
+      <article class="part">
+        <h4>Controller — MakerX D100S (VESC)</h4>
+        <p>Open-source VESC-based controller designed to drop into the factory bay on the original
+        mounting pattern, with adapter looms so nothing in the carbon shell gets cut.</p>
+        <span class="part__status">PROPOSED — mechanical design done, not yet fitted</span>
+      </article>
+      <article class="part">
+        <h4>Motors — dual 6374 retained</h4>
+        <p>The existing motors stay. Speed gains come from voltage and field weakening,
+        not a motor swap — keeping the build reversible and cheap to unwind.</p>
+        <span class="part__status">DONE — retained by design</span>
+      </article>
+      <article class="part">
+        <h4>Remote — Phaze compatibility</h4>
+        <p>Ambition: keep the Phaze remote working through the nRF52840 BLE bridge.
+        The remote's communication is fully mapped; the 16S battery-display
+        overflow is a known, documented constraint.</p>
+        <span class="part__status">RESEARCH — bridge in development</span>
+      </article>
+    </div>
+    <div class="stage__media reveal">
+      <img src="assets/chassis-wiring.webp" alt="Spare chassis interior wiring" loading="lazy">
+      <p class="stage__caption">Spare carbon chassis — the Stage 1 donor. Factory mounts preserved for a clean swap.</p>
+    </div>
+  </div>
+
+  <div class="reversible reveal">
+    <img src="assets/cover-front.webp" alt="Transparent board cover front" loading="lazy">
+    <div>
+      <h3>Reversible by design</h3>
+      <p>The stock 12S4P pack and stock EFOC 2.0 controller stay intact and preserved.
+      Every modification lives on the spare carbon chassis — if Frankenstein doesn't
+      work out, the factory setup rides home untouched. Even the tuning software is
+      volatile-memory only: power-cycle reverts.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE LOG ============ -->
+<section class="section section--alt" id="log">
+  <div class="section__head reveal">
+    <p class="section__index">04 / THE TIMELINE</p>
+    <h2>The Log</h2>
+    <p class="section__lede">Milestones, in order. Speculative items are labelled — nothing
+    proposed is presented as finished hardware.</p>
+  </div>
+  <ol class="timeline">
+    <li class="timeline__item reveal"><span class="timeline__date">GENESIS</span>
+      <h3>The hybrid donor</h3>
+      <p>Diablo controller internals and 3500&nbsp;W motors grafted into a Hadean enclosure — a factory one-off that started the whole obsession.</p></li>
+    <li class="timeline__item reveal"><span class="timeline__date">COFFS HARBOUR</span>
+      <h3>ESRA Nationals</h3>
+      <p>Six hours of track practice on a 9-month-old pack. Battery sag, not rider error, became the wall — and the brief.</p></li>
+    <li class="timeline__item reveal"><span class="timeline__date">THE TEARDOWN</span>
+      <h3>Inside the black box</h3>
+      <p>Custom tooling built to talk to the controller directly — live tuning, battery forensics and fault monitoring from a phone.</p></li>
+    <li class="timeline__item reveal"><span class="timeline__date">FIELD WEAKENING</span>
+      <h3>Limits mapped, safely</h3>
+      <p>The FW control loop, its limiter and protection boundaries verified piece by piece. ~78&nbsp;km/h observed; every change revertible on power-cycle.</p></li>
+    <li class="timeline__item reveal"><span class="timeline__date">BATTERY FORENSICS</span>
+      <h3>Why the pack faded</h3>
+      <p>Live sag logging caught one cell group dropping under load while resting voltages looked balanced. Teardown found enclosure ribs wearing through cell sleeves. Pack sent for repair.</p></li>
+    <li class="timeline__item reveal"><span class="timeline__date">FRANKENSTEIN</span>
+      <h3>Two-stage plan on spare chassis</h3>
+      <p>Stage 1: 16S3P P50B + D100S VESC on factory mounts. Stage 2: whatever the platform proves it can take.</p></li>
+    <li class="timeline__item reveal"><span class="timeline__date">SOFTWARE</span>
+      <h3>Workshop diagnostics</h3>
+      <p>A desktop diagnostic suite with simultaneous controller and battery links, session logbook and exportable reports — verified on live hardware.</p></li>
+    <li class="timeline__item reveal"><span class="timeline__date">NEXT</span>
+      <h3>Bridge &amp; battery build</h3>
+      <p>nRF52840 BLE bridge development and the Marsen 16S3P pack build are the active workstreams.</p></li>
+  </ol>
+</section>
+
+<!-- ============ STATUS ============ -->
+<section class="section" id="status">
+  <div class="section__head reveal">
+    <p class="section__index">05 / SCOREBOARD</p>
+    <h2>Honest Status</h2>
+    <p class="section__lede">Everything below is labelled by what it actually is —
+    no proposed spec is dressed up as completed hardware.</p>
+  </div>
+  <div class="statusgrid reveal">
+    <div class="status status--done"><h3>Verified working</h3>
+      <ul><li>Custom mobile tuning &amp; telemetry tooling</li>
+      <li>Field-weakening limits mapped and safely applied</li>
+      <li>Desktop diagnostic suite (live hardware)</li>
+      <li>Battery sag forensics &amp; fault monitoring</li></ul></div>
+    <div class="status status--active"><h3>In progress</h3>
+      <ul><li>12S pack cell-group repair (at technician)</li>
+      <li>nRF52840 BLE bridge development</li>
+      <li>Stage 1 mechanical design &amp; looms</li></ul></div>
+    <div class="status status--prop"><h3>Proposed, not built</h3>
+      <ul><li>16S3P Molicel P50B pack (design agreed)</li>
+      <li>D100S VESC drop-in (mount designed)</li>
+      <li>Phaze-remote-over-bridge compatibility</li></ul></div>
+    <div class="status status--unv"><h3>Unverified / open</h3>
+      <ul><li>Motor KV measurement (needed for speed projections)</li>
+      <li>16S real-world top speed &amp; thermal envelope</li>
+      <li>P60C cell upgrade path (~12+ months out)</li></ul></div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <img src="assets/logo.webp" alt="" width="40" height="23" loading="lazy">
+  <p>Project Frankenstein — an Evolve Diablo Carbon engineering log.
+  Stock hardware preserved. All modifications reversible.</p>
+  <p class="footer__fine">Unofficial project. Not affiliated with or endorsed by Evolve Skateboards.
+  Field-weakening results are configuration-specific and not a product specification.</p>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>
