@@ -99,7 +99,7 @@ code{font-family:var(--mono);font-size:.88em;background:#1c1c22;padding:.1em .35
 @keyframes tick{to{transform:translateX(-50%)}}
 
 /* ---------- sections ---------- */
-.section{padding:110px 4vw;max-width:1500px;margin:0 auto}
+.section{scroll-margin-top:70px;padding:110px 4vw;max-width:1500px;margin:0 auto}
 .section--alt{background:var(--bg2);max-width:none}
 .section--alt>.section__head,.section--alt>.split,.section--alt>.wide,.section--alt>.cards,.section--alt>.timeline,.section--alt>.statusgrid{max-width:1500px;margin-left:auto;margin-right:auto}
 .section__index{font-family:var(--mono);font-size:12px;letter-spacing:.24em;color:var(--red);margin-bottom:14px}
@@ -394,4 +394,4 @@ main > section:not(.hero){content-visibility:auto;contain-intrinsic-size:auto 90
 
 /* inline jargon terms */
 .jterm{border-bottom:1px dotted var(--dim);cursor:help}
-.jterm:focus-visible{outline:2px solid var(--red);outline-radius:2px}
+.jterm:focus-visible{outline:2px solid var(--red);outline-offset:2px}
