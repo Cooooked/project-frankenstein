@@ -199,7 +199,13 @@
 
     lightboxImgs.forEach(function (img, i) {
       img.style.cursor = 'zoom-in';
+      img.tabIndex = 0;
+      img.setAttribute('role', 'button');
+      img.setAttribute('aria-label', 'View larger: ' + (img.alt || 'photo'));
       img.addEventListener('click', function () { open(i); });
+      img.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); }
+      });
     });
     lb.querySelector('.lb-close').addEventListener('click', close);
     lb.querySelector('.lb-prev').addEventListener('click', function () { show(lbIdx - 1); });

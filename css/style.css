@@ -404,3 +404,4 @@ main > section:not(.hero){content-visibility:auto;contain-intrinsic-size:auto 90
 .guide-tools{display:flex;gap:8px;margin-top:14px}
 .guide-tool{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);background:none;border:1px solid var(--line);border-radius:5px;padding:6px 12px;cursor:pointer}
 .guide-tool:hover{color:var(--ink);border-color:#4a4a52}
+main img[loading="lazy"]:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:4px}
