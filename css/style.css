@@ -405,3 +405,9 @@ main > section:not(.hero){content-visibility:auto;contain-intrinsic-size:auto 90
 .guide-tool{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);background:none;border:1px solid var(--line);border-radius:5px;padding:6px 12px;cursor:pointer}
 .guide-tool:hover{color:var(--ink);border-color:#4a4a52}
 main img[loading="lazy"]:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:4px}
+.tl-progress{display:flex;gap:3px;height:6px;margin:0 0 8px}
+.tl-p{border-radius:3px;min-width:8px}
+.tl-p.done{background:var(--green,#3fb96f)}
+.tl-p.active{background:var(--red)}
+.tl-p.planned{background:#3a3a44}
+.tl-progress-note{font-size:10.5px;letter-spacing:.08em;color:var(--dim);margin:0 0 18px;text-transform:uppercase}
