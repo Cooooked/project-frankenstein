@@ -116,7 +116,8 @@
         <button class="cfg-btn" data-cfg="frank" type="button" aria-pressed="false">Frankenstein spec</button>
         <span class="cfg-note mono" id="cfgNote" aria-live="polite">as found</span>
       </div>
-      <button class="spec-copy" id="specCopy" type="button">Copy spec sheet</button>
+      <button class="spec-copy" id="specCopy" type="button" aria-describedby="copyMsg">Copy spec sheet</button>
+      <span class="sr-only" id="copyMsg" role="status"></span>
       <div class="spec-grid reveal" id="specGrid">
         <div class="spec" data-stock="12S4P · Samsung 21700-40T · 16 Ah" data-frank="16S3P · Molicel P50B · 48 cells"><span class="spec__k">Battery</span><span class="spec__v">12S4P · Samsung 21700-40T · 16 Ah</span></div>
         <div class="spec" data-stock="Dual 6374-class outrunners" data-frank="Dual 6374-class outrunners · retained"><span class="spec__k">Motors</span><span class="spec__v">Dual 6374-class outrunners</span></div>

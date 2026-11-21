@@ -551,9 +551,11 @@
       });
       lines.push('', 'cooooked.github.io/project-frankenstein');
       var text = lines.join('\n');
+      var msg = document.getElementById('copyMsg');
       function done() {
         btn.classList.add('is-done'); btn.textContent = 'Copied';
-        setTimeout(function () { btn.classList.remove('is-done'); btn.textContent = 'Copy spec sheet'; }, 1600);
+        if (msg) msg.textContent = 'Spec sheet copied to clipboard';
+        setTimeout(function () { btn.classList.remove('is-done'); btn.textContent = 'Copy spec sheet'; if (msg) msg.textContent = ''; }, 1600);
       }
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(done, function () { fallback(); });
