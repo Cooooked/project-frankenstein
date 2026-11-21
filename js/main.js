@@ -102,3 +102,29 @@
       renderCells(btn.dataset.arr);
     });
   });
+
+  // Hero stat count-up on first reveal
+  var heroStats = document.querySelectorAll('.hero__stats strong');
+  if (heroStats.length && 'IntersectionObserver' in window) {
+    var statIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        statIO.unobserve(en.target);
+        var el = en.target, target = parseFloat(el.textContent), suffix = el.nextElementSibling ? '' : '';
+        var raw = el.textContent, numMatch = raw.match(/[\d.]+/);
+        if (!numMatch) return;
+        var end = parseFloat(numMatch[0]), dec = numMatch[0].includes('.') ? 1 : 0;
+        var t0 = performance.now(), dur = 1100;
+        function tick(now) {
+          var p = Math.min(1, (now - t0) / dur);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = (end * eased).toFixed(dec);
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.4 });
+    document.querySelector('.hero__stats').addEventListener('animationstart', function(){}, {once:true});
+    var statsEl = document.querySelector('.hero__stats');
+    if (statsEl) statIO.observe(statsEl);
+  }
