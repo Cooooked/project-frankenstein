@@ -270,3 +270,88 @@
     }, { rootMargin: '-30% 0px -60% 0px' });
     spySections.forEach(function (s) { spyIO.observe(s); });
   }
+
+  // Field-weakening explorer — conceptual trade-off curves (illustration only)
+  (function () {
+    var dial = document.getElementById('fwDial');
+    var cv = document.getElementById('fwChart');
+    if (!dial || !cv || !cv.getContext) return;
+    var ctx = cv.getContext('2d');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var speedEl = document.getElementById('fwSpeed');
+    var effEl = document.getElementById('fwEff');
+    var heatEl = document.getElementById('fwHeat');
+    var t = 0, raf = 0, started = false;
+
+    function size() {
+      var r = cv.getBoundingClientRect();
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.round(r.width * dpr);
+      cv.height = Math.round(190 * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    size();
+    window.addEventListener('resize', function () { size(); draw(); });
+
+    function draw() {
+      var w = cv.getBoundingClientRect().width, h = 190;
+      ctx.clearRect(0, 0, w, h);
+      var padL = 40, padR = 14, padT = 12, padB = 24;
+      var iw = w - padL - padR, ih = h - padT - padB;
+      var fw = +dial.value / 100;
+      // conceptual curves: speed rises then plateaus; efficiency falls; heat rises
+      function speedAt(x) { return 0.45 + 0.5 * (1 - Math.exp(-2.6 * x)); }
+      function effAt(x)   { return 1 - 0.55 * x * x; }
+      function heatAt(x)  { return Math.pow(x, 1.6); }
+      function X(x) { return padL + x * iw; }
+      function Y(v) { return padT + (1 - v) * ih; }
+      // grid
+      ctx.strokeStyle = '#2a2a30'; ctx.fillStyle = '#6a6a72';
+      ctx.font = '9px Consolas, monospace'; ctx.lineWidth = 1;
+      [0, .25, .5, .75, 1].forEach(function (g) {
+        ctx.beginPath(); ctx.moveTo(padL, Y(g)); ctx.lineTo(w - padR, Y(g)); ctx.stroke();
+        ctx.fillText(Math.round(g * 100) + '%', 6, Y(g) + 3);
+      });
+      [0, .25, .5, .75, 1].forEach(function (g) {
+        ctx.fillText(Math.round(g * 100) + '%', X(g) - 8, h - 8);
+      });
+      ctx.fillText('FIELD WEAKENING →', padL, h - 8);
+      // curves
+      function curve(fn, color, label) {
+        ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.beginPath();
+        for (var i = 0; i <= 60; i++) {
+          var x = i / 60, px = X(x), py = Y(fn(x));
+          if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+        }
+        ctx.stroke();
+        ctx.fillStyle = color; ctx.font = '600 10px Consolas, monospace';
+        ctx.fillText(label, X(0.62), Y(fn(0.62)) - 8);
+      }
+      curve(speedAt, '#e10600', 'speed');
+      curve(effAt, '#4a9e6b', 'efficiency');
+      curve(heatAt, '#d98e32', 'heat');
+      // marker at dial position
+      var mx = X(fw);
+      ctx.strokeStyle = 'rgba(232,232,232,.4)'; ctx.setLineDash([4,4]);
+      ctx.beginPath(); ctx.moveTo(mx, padT); ctx.lineTo(mx, padT + ih); ctx.stroke();
+      ctx.setLineDash([]);
+      [[speedAt(fw), '#e10600'], [effAt(fw), '#4a9e6b'], [heatAt(fw), '#d98e32']].forEach(function (p) {
+        ctx.fillStyle = p[1];
+        ctx.beginPath(); ctx.arc(mx, Y(p[0]), 4, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = '#0a0a0c'; ctx.lineWidth = 1.5; ctx.stroke();
+      });
+      // readouts
+      speedEl.textContent = fw < 0.02 ? 'baseline' : '+' + Math.round((speedAt(fw) / speedAt(0) - 1) * 100) + '%';
+      effEl.textContent = Math.round(effAt(fw) * 100) + '%';
+      heatEl.textContent = fw < 0.15 ? 'low' : fw < 0.5 ? 'moderate' : fw < 0.8 ? 'high' : 'severe';
+      heatEl.style.color = fw < 0.5 ? '' : '#e10600';
+    }
+    dial.addEventListener('input', draw);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) {
+        en.forEach(function (e) {
+          if (e.isIntersecting && !started) { started = true; draw(); }
+        });
+      }).observe(cv);
+    } else draw();
+  })();

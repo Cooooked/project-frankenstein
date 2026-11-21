@@ -310,6 +310,27 @@
     <p class="voltage__note">Observed figures are configuration-specific. The 16S speed projection is deliberately unverified — no number is claimed until the pack is built and measured.</p>
   </div>
 
+  <div class="fw reveal">
+    <div class="fw__head">
+      <h3>Field weakening, honestly</h3>
+      <p>Drag the dial — this is a conceptual illustration of the trade-off, not measured data.
+      On the real board, every limit is verified parameter by parameter before a single ride.</p>
+    </div>
+    <div class="fw__body">
+      <div class="fw__dial">
+        <label class="ctl"><span class="ctl-label">Field weakening <output id="fwOut">0%</output></span>
+          <input type="range" id="fwDial" min="0" max="100" value="0" step="1"></label>
+        <div class="fw__reads mono">
+          <span>TOP SPEED <b id="fwSpeed">baseline</b></span>
+          <span>EFFICIENCY <b id="fwEff">100%</b></span>
+          <span>HEAT <b id="fwHeat">low</b></span>
+        </div>
+      </div>
+      <canvas id="fwChart" height="190" aria-label="Conceptual curve: field weakening versus speed and efficiency"></canvas>
+    </div>
+    <p class="fw__note">Conceptual model for illustration only — the board's actual FW envelope is bounded, logged and revertible on power-cycle.</p>
+  </div>
+
   <div class="horizon reveal">
     <div class="horizon__head">
       <span class="stage__num">STAGE 2</span>
