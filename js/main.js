@@ -38,6 +38,12 @@
   links.addEventListener('click', function (e) {
     if (e.target.closest('a')) closeNav();
   });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && links.classList.contains('open')) {
+      closeNav();
+      toggle.focus();
+    }
+  });
   links.addEventListener('click', function (e) {
     if (e.target.tagName === 'A') {
       links.classList.remove('open');
