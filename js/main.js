@@ -508,10 +508,10 @@
         span.title = pair[1];
         span.textContent = m[0];
         var rest = document.createTextNode(text.slice(m.index + m[0].length));
-        node.parentNode.insertBefore(span, node);
-        node.parentNode.insertBefore(rest, span.nextSibling ? span.nextSibling : null);
-        // node keeps the prefix text
+        var after = node.nextSibling;
         node.nodeValue = text.slice(0, m.index);
+        node.parentNode.insertBefore(span, after);
+        node.parentNode.insertBefore(rest, after);
         made++;
       });
     });
