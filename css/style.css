@@ -399,3 +399,5 @@ main > section:not(.hero){content-visibility:auto;contain-intrinsic-size:auto 90
 .fw-preset{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);background:transparent;border:1px solid var(--line);border-radius:5px;padding:6px 12px;cursor:pointer;transition:color .15s,border-color .15s}
 .fw-preset:hover{color:var(--ink);border-color:#4a4a52}
 .fw-preset.is-active{color:var(--red);border-color:var(--red)}
+.checklist__reset{font-size:10px;letter-spacing:.1em;color:var(--dim);background:none;border:1px solid var(--line);border-radius:5px;padding:5px 10px;cursor:pointer;text-transform:uppercase}
+.checklist__reset:hover{color:var(--ink);border-color:#4a4a52}

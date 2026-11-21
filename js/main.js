@@ -13,10 +13,18 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
+  function closeNav() {
+    links.classList.remove('open');
+    toggle.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
   toggle.addEventListener('click', function () {
     var open = links.classList.toggle('open');
     toggle.classList.toggle('open', open);
     toggle.setAttribute('aria-expanded', open);
+  });
+  links.addEventListener('click', function (e) {
+    if (e.target.closest('a')) closeNav();
   });
   links.addEventListener('click', function (e) {
     if (e.target.tagName === 'A') {
@@ -419,6 +427,16 @@
       });
     });
     update();
+    var reset = document.createElement('button');
+    reset.type = 'button';
+    reset.className = 'checklist__reset mono';
+    reset.textContent = 'reset';
+    reset.addEventListener('click', function () {
+      state = {};
+      try { localStorage.removeItem(KEY); } catch (e) {}
+      update();
+    });
+    box.querySelector('.checklist__head').appendChild(reset);
   })();
 
   // Copy spec sheet — dumps the current toggle state as plain text
