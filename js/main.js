@@ -355,3 +355,33 @@
       }).observe(cv);
     } else draw();
   })();
+
+  // Pre-ride checklist — persistent demo state on this device
+  (function () {
+    var box = document.getElementById('checklist');
+    var count = document.getElementById('checkCount');
+    var bar = document.getElementById('checkBar');
+    var boxes = box ? box.querySelectorAll('input[data-chk]') : [];
+    if (!box || !boxes.length) return;
+    var KEY = 'pf-checklist-v1';
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { state = {}; }
+    function update() {
+      var done = 0;
+      boxes.forEach(function (b) {
+        b.checked = !!state[b.dataset.chk];
+        if (b.checked) done++;
+      });
+      count.textContent = done + ' / ' + boxes.length + ' cleared';
+      bar.style.width = (done / boxes.length * 100) + '%';
+      box.classList.toggle('done', done === boxes.length);
+    }
+    boxes.forEach(function (b) {
+      b.addEventListener('change', function () {
+        state[b.dataset.chk] = b.checked;
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+        update();
+      });
+    });
+    update();
+  })();
