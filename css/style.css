@@ -394,6 +394,9 @@ main > section:not(.hero){content-visibility:auto;contain-intrinsic-size:auto 90
 
 /* inline jargon terms */
 .jterm{border-bottom:1px dotted var(--dim);cursor:help}
+.jterm{position:relative}
+.jterm::after{content:attr(data-tip);position:absolute;left:0;bottom:calc(100% + 6px);width:max-content;max-width:240px;white-space:normal;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:.72rem;font-weight:400;color:var(--dim);line-height:1.4;opacity:0;pointer-events:none;transition:opacity .15s;z-index:60}
+.jterm:hover::after,.jterm:focus-visible::after{opacity:1}
 .jterm:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 .fw__presets{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
 .fw-preset{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);background:transparent;border:1px solid var(--line);border-radius:5px;padding:6px 12px;cursor:pointer;transition:color .15s,border-color .15s}

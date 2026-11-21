@@ -625,7 +625,7 @@
         var span = document.createElement('span');
         span.className = 'jterm';
         span.tabIndex = 0;
-        span.title = pair[1];
+        span.dataset.tip = pair[1];
         span.textContent = m[0];
         var rest = document.createTextNode(text.slice(m.index + m[0].length));
         var after = node.nextSibling;
