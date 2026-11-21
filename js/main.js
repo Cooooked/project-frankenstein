@@ -417,3 +417,26 @@
       }
     });
   })();
+
+  // Pack calculator — series/parallel → volts & energy (educational approximation)
+  (function () {
+    var sEl = document.getElementById('pcSeries');
+    var pEl = document.getElementById('pcPar');
+    if (!sEl || !pEl) return;
+    var nom = document.getElementById('pcNom'), peak = document.getElementById('pcPeak');
+    var cells = document.getElementById('pcCells'), wh = document.getElementById('pcWh');
+    var sOut = document.getElementById('pcS'), pOut = document.getElementById('pcP');
+    var CELL_V_NOM = 3.6, CELL_V_PEAK = 4.2, CELL_AH = 50;
+    function fmt(n) { return n.toLocaleString('en-US'); }
+    function update() {
+      var s = +sEl.value, p = +pEl.value;
+      sOut.textContent = s + 'S'; pOut.textContent = p + 'P';
+      nom.textContent = (s * CELL_V_NOM).toFixed(1) + ' V';
+      peak.textContent = (s * CELL_V_PEAK).toFixed(1) + ' V';
+      cells.textContent = fmt(s * p);
+      wh.textContent = fmt(Math.round(s * CELL_V_NOM * p * CELL_AH)) + ' Wh';
+    }
+    sEl.addEventListener('input', update);
+    pEl.addEventListener('input', update);
+    update();
+  })();

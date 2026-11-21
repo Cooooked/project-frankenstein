@@ -361,3 +361,14 @@ code{font-family:var(--mono);font-size:.88em;background:#1c1c22;padding:.1em .35
 @keyframes hsPulse{0%{box-shadow:0 0 0 0 rgba(225,6,0,.45)}70%{box-shadow:0 0 0 12px rgba(225,6,0,0)}100%{box-shadow:0 0 0 0 rgba(225,6,0,0)}}
 @media(max-width:640px){.hotspot span{left:auto;right:26px;top:auto;bottom:24px;white-space:normal;width:150px}}
 @media(prefers-reduced-motion:reduce){.hotspot i{animation:none}}
+
+/* ---------- pack calculator ---------- */
+.packcalc{margin-top:34px;border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:26px 30px}
+.packcalc__head h3{font-size:clamp(18px,2vw,23px);font-weight:900;text-transform:uppercase;margin:0}
+.packcalc__head p{color:var(--dim);font-size:13.5px;margin:8px 0 0;max-width:560px}
+.packcalc__body{display:grid;grid-template-columns:280px 1fr;gap:24px;margin-top:20px;align-items:center}
+.packcalc__reads{display:grid;grid-template-columns:1fr 1fr;gap:10px 26px;font-size:10.5px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase}
+.packcalc__reads b{display:block;font-size:19px;color:var(--ink);letter-spacing:.02em;text-transform:none;margin-top:2px}
+.packcalc__note{margin:16px 0 0;font-family:var(--mono);font-size:10px;color:#6a6a72;letter-spacing:.04em}
+@media(max-width:760px){.packcalc__body{grid-template-columns:1fr}}
+@media(max-width:560px){.packcalc{padding:20px 16px}}
