@@ -348,3 +348,16 @@ code{font-family:var(--mono);font-size:.88em;background:#1c1c22;padding:.1em .35
 .spec-copy{display:inline-block;margin:14px 0 0;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:transparent;border:1px solid var(--line);border-radius:6px;padding:8px 14px;cursor:pointer;transition:color .15s,border-color .15s}
 .spec-copy:hover{color:var(--ink);border-color:#4a4a52}
 .spec-copy.is-done{color:#4a9e6b;border-color:#2c5a3a}
+
+/* ---------- chassis hotspots ---------- */
+.hotspot-fig{position:relative}
+.hotspot-fig img{display:block;width:100%}
+.hotspot{position:absolute;width:22px;height:22px;margin:-11px 0 0 -11px;padding:0;border:0;background:transparent;cursor:pointer;z-index:2}
+.hotspot i{position:absolute;inset:4px;border-radius:50%;background:var(--red);border:2px solid #fff;box-shadow:0 0 0 4px rgba(225,6,0,.25);animation:hsPulse 2.4s ease-out infinite}
+.hotspot span{position:absolute;left:26px;top:50%;transform:translateY(-50%);white-space:nowrap;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:7px 11px;font-size:12px;color:var(--ink);opacity:0;pointer-events:none;transition:opacity .18s;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+.hotspot:hover i,.hotspot:focus-visible i{animation:none;box-shadow:0 0 0 7px rgba(225,6,0,.35)}
+.hotspot:hover span,.hotspot:focus-visible span{opacity:1}
+.hotspot:focus-visible{outline:none}
+@keyframes hsPulse{0%{box-shadow:0 0 0 0 rgba(225,6,0,.45)}70%{box-shadow:0 0 0 12px rgba(225,6,0,0)}100%{box-shadow:0 0 0 0 rgba(225,6,0,0)}}
+@media(max-width:640px){.hotspot span{left:auto;right:26px;top:auto;bottom:24px;white-space:normal;width:150px}}
+@media(prefers-reduced-motion:reduce){.hotspot i{animation:none}}
