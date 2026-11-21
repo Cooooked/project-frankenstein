@@ -55,3 +55,16 @@
       if (cfgNote) cfgNote.textContent = cfg === 'stock' ? 'as found' : 'planned — not yet built';
     });
   });
+
+  // Timeline filters
+  var tlChips = document.querySelectorAll('.tl-chip');
+  var tlItems = document.querySelectorAll('.timeline__item');
+  tlChips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      tlChips.forEach(function (c) { c.classList.toggle('is-active', c === chip); });
+      var f = chip.dataset.f;
+      tlItems.forEach(function (li) {
+        li.hidden = f !== 'all' && li.dataset.status !== f;
+      });
+    });
+  });

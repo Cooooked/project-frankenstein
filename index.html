@@ -280,29 +280,35 @@
     <p class="section__lede">Milestones, in order. Speculative items are labelled — nothing
     proposed is presented as finished hardware.</p>
   </div>
+  <div class="tl-filters reveal" role="group" aria-label="Filter timeline">
+    <button class="tl-chip is-active" data-f="all" type="button">All</button>
+    <button class="tl-chip" data-f="done" type="button">Complete</button>
+    <button class="tl-chip" data-f="active" type="button">Active</button>
+    <button class="tl-chip" data-f="planned" type="button">Planned</button>
+  </div>
   <ol class="timeline">
-    <li class="timeline__item reveal"><span class="timeline__date">GENESIS</span>
+    <li class="timeline__item reveal" data-status="done"><span class="timeline__date">GENESIS</span>
       <h3>The hybrid donor</h3>
       <p>Diablo controller internals and 3500&nbsp;W motors grafted into a Hadean enclosure — a factory one-off that started the whole obsession.</p></li>
-    <li class="timeline__item reveal"><span class="timeline__date">COFFS HARBOUR</span>
+    <li class="timeline__item reveal" data-status="done"><span class="timeline__date">COFFS HARBOUR</span>
       <h3>ESRA Nationals</h3>
       <p>Six hours of track practice on a 9-month-old pack. Battery sag, not rider error, became the wall — and the brief.</p></li>
-    <li class="timeline__item reveal"><span class="timeline__date">THE TEARDOWN</span>
+    <li class="timeline__item reveal" data-status="done"><span class="timeline__date">THE TEARDOWN</span>
       <h3>Inside the black box</h3>
       <p>Custom tooling built to talk to the controller directly — live tuning, battery forensics and fault monitoring from a phone.</p></li>
-    <li class="timeline__item reveal"><span class="timeline__date">FIELD WEAKENING</span>
+    <li class="timeline__item reveal" data-status="done"><span class="timeline__date">FIELD WEAKENING</span>
       <h3>Limits mapped, safely</h3>
       <p>The FW control loop, its limiter and protection boundaries verified piece by piece. ~78&nbsp;km/h observed; every change revertible on power-cycle.</p></li>
-    <li class="timeline__item reveal"><span class="timeline__date">BATTERY FORENSICS</span>
+    <li class="timeline__item reveal" data-status="done"><span class="timeline__date">BATTERY FORENSICS</span>
       <h3>Why the pack faded</h3>
       <p>Live sag logging caught one cell group dropping under load while resting voltages looked balanced. Teardown found enclosure ribs wearing through cell sleeves. Pack sent for repair.</p></li>
-    <li class="timeline__item reveal"><span class="timeline__date">FRANKENSTEIN</span>
+    <li class="timeline__item reveal" data-status="planned"><span class="timeline__date">FRANKENSTEIN</span>
       <h3>Two-stage plan on spare chassis</h3>
       <p>Stage 1: 16S3P P50B + D100S VESC on factory mounts. Stage 2: whatever the platform proves it can take.</p></li>
-    <li class="timeline__item reveal"><span class="timeline__date">SOFTWARE</span>
+    <li class="timeline__item reveal" data-status="done"><span class="timeline__date">SOFTWARE</span>
       <h3>Workshop diagnostics</h3>
       <p>A desktop diagnostic suite with simultaneous controller and battery links, session logbook and exportable reports — verified on live hardware.</p></li>
-    <li class="timeline__item reveal"><span class="timeline__date">NEXT</span>
+    <li class="timeline__item reveal" data-status="active"><span class="timeline__date">NEXT</span>
       <h3>Bridge &amp; battery build</h3>
       <p>nRF52840 BLE bridge development and the Marsen 16S3P pack build are the active workstreams.</p></li>
   </ol>

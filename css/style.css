@@ -241,3 +241,12 @@ code{font-family:var(--mono);font-size:.88em;background:#1c1c22;padding:.1em .35
 .cfg-btn.is-active{background:var(--red);color:#fff}
 .cfg-btn:not(.is-active):hover{color:var(--ink)}
 .cfg-note{font-size:10.5px;letter-spacing:.1em;color:#6a6a72;margin-left:14px;align-self:center}
+
+/* ---------- timeline filters ---------- */
+.tl-filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:36px}
+.tl-chip{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:transparent;color:var(--dim);border:1px solid var(--line);border-radius:3px;padding:8px 16px;cursor:pointer;transition:all .18s}
+.tl-chip:hover{color:var(--ink);border-color:var(--red)}
+.tl-chip.is-active{background:var(--red);border-color:var(--red);color:#fff}
+.timeline__item[hidden]{display:none}
+.timeline__item[data-status="active"]::before{border-color:var(--amber,#ffb000);background:var(--amber,#ffb000)}
+.timeline__item[data-status="planned"]::before{border-color:var(--dim);background:var(--bg2)}
