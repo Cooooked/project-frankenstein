@@ -309,3 +309,6 @@ code{font-family:var(--mono);font-size:.88em;background:#1c1c22;padding:.1em .35
 .guide-item summary::-webkit-details-marker{display:none}
 .guide-item p{margin:0;padding:0 20px 18px;color:var(--dim);font-size:14px;line-height:1.6}
 @media(max-width:560px){.guide-grid{grid-template-columns:1fr}}
+
+/* ---------- scroll spy ---------- */
+.nav__links a.is-active{color:var(--red);border-bottom:2px solid var(--red)}

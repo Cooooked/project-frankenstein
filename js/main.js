@@ -251,3 +251,22 @@
       }).observe(cv);
     } else { draw(performance.now()); }
   })();
+
+  // Scroll-spy: highlight the nav link for the section in view
+  var spySections = Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
+  var spyLinks = {};
+  document.querySelectorAll('.nav__links a').forEach(function (a) {
+    var id = a.getAttribute('href').replace('#', '');
+    if (document.getElementById(id)) spyLinks[id] = a;
+  });
+  if (spySections.length && 'IntersectionObserver' in window) {
+    var spyIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting && spyLinks[en.target.id]) {
+          Object.keys(spyLinks).forEach(function (k) { spyLinks[k].classList.remove('is-active'); });
+          spyLinks[en.target.id].classList.add('is-active');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    spySections.forEach(function (s) { spyIO.observe(s); });
+  }
