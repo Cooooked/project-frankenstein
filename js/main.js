@@ -68,3 +68,37 @@
       });
     });
   });
+
+  // Cell arrangement map: 48 cells as series groups × parallel strings
+  var cellGrid = document.getElementById('cellmapGrid');
+  var cellRead = document.getElementById('cellmapRead');
+  var ARR = {
+    '12s4p': { s: 12, p: 4, v: '43.2 V nominal', tag: '12 series × 4 parallel' },
+    '16s3p': { s: 16, p: 3, v: '57.6 V nominal', tag: '16 series × 3 parallel' }
+  };
+  function renderCells(key) {
+    var c = ARR[key];
+    cellGrid.innerHTML = '';
+    cellGrid.style.setProperty('--cols', c.s);
+    for (var i = 0; i < c.s; i++) {
+      var row = document.createElement('div');
+      row.className = 'cellrow';
+      for (var j = 0; j < c.p; j++) {
+        var cell = document.createElement('span');
+        cell.className = 'cell';
+        cell.style.setProperty('--hue', (i * 360 / c.s).toFixed(0));
+        cell.title = 'Group ' + (i + 1);
+        row.appendChild(cell);
+      }
+      cellGrid.appendChild(row);
+    }
+    cellRead.textContent = c.tag + ' — ' + c.v;
+    cellGrid.setAttribute('aria-label', c.tag + ' cell arrangement, ' + c.v);
+  }
+  renderCells('12s4p');
+  document.querySelectorAll('.cellmap .cfg-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.cellmap .cfg-btn').forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+      renderCells(btn.dataset.arr);
+    });
+  });

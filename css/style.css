@@ -250,3 +250,13 @@ code{font-family:var(--mono);font-size:.88em;background:#1c1c22;padding:.1em .35
 .timeline__item[hidden]{display:none}
 .timeline__item[data-status="active"]::before{border-color:var(--amber,#ffb000);background:var(--amber,#ffb000)}
 .timeline__item[data-status="planned"]::before{border-color:var(--dim);background:var(--bg2)}
+
+/* ---------- cell arrangement map ---------- */
+.cellmap{margin-top:34px;border-top:1px solid var(--line);padding-top:26px}
+.cellmap__head{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:20px}
+.cellmap__read{font-size:11px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.cellmap__grid{display:flex;flex-direction:column;gap:5px}
+.cellrow{display:grid;grid-template-columns:repeat(var(--cols,12),1fr);gap:5px}
+.cell{aspect-ratio:1.6/1;background:hsl(var(--hue) 70% 42%);border-radius:2px;opacity:.85;transition:opacity .15s}
+.cellrow:hover .cell{opacity:1}
+.cellmap__note{margin-top:14px;font-size:12.5px;color:var(--dim)}
