@@ -326,7 +326,7 @@ code{font-family:var(--mono);font-size:.88em;background:#1c1c22;padding:.1em .35
 @media(max-width:560px){.fw{padding:22px 18px}}
 
 /* ---------- pre-ride checklist ---------- */
-.checklist{margin-top:48px;border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:30px 34px;max-width:720px}
+#checklist{margin-top:48px;border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:30px 34px;max-width:720px}
 .checklist__head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
 .checklist__head h3{font-size:clamp(19px,2.2vw,25px);font-weight:900;text-transform:uppercase;margin:0}
 .checklist__head .mono{font-size:11px;letter-spacing:.12em;color:var(--dim)}
