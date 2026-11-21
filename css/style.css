@@ -387,3 +387,7 @@ code{font-family:var(--mono);font-size:.88em;background:#1c1c22;padding:.1em .35
 .key--active{background:#ff8a80}
 .key--prop{background:#e8c96a}
 .key--unv{background:#9a9aa2}
+
+/* render-perf: skip offscreen sections */
+main > section:not(.hero){content-visibility:auto;contain-intrinsic-size:auto 900px}
+@media(prefers-reduced-motion:no-preference){main > section:not(.hero){contain-intrinsic-size:auto 900px}}
