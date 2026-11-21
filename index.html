@@ -26,6 +26,7 @@
   </a>
   <nav class="nav__links" id="navLinks">
     <a href="#board">The Board</a>
+    <a href="#guide">Field guide</a>
     <a href="#software">The Approach</a>
     <a href="#build">The Build</a>
     <a href="#log">The Log</a>
@@ -195,6 +196,24 @@
       <img src="assets/drivetrain.webp" alt="Dual-motor drivetrain inside the board enclosure" loading="lazy">
       <img src="assets/teardown.webp" alt="Battery enclosure teardown showing cell sleeve wear" loading="lazy">
     </div>
+  </div>
+</section>
+
+<!-- ============ FIELD GUIDE ============ -->
+<section class="section" id="guide">
+  <div class="section__head reveal">
+    <p class="section__index">02b / FIELD GUIDE</p>
+    <h2>Read this before the spec sheet</h2>
+    <p class="section__lede">The build talks in shorthand. These are the terms that matter —
+    plain-language versions, no engineering degree required.</p>
+  </div>
+  <div class="guide-grid reveal">
+    <details class="guide-item"><summary>12S4P → 16S3P</summary><p>Battery shorthand. The first number is cells in series (sets voltage), the second is strings in parallel (sets capacity). Going 12→16 series adds ~33% voltage; going 4→3 parallel trades some capacity for it. Same 48 cells, rearranged.</p></details>
+    <details class="guide-item"><summary>Field weakening</summary><p>A controller technique that trades some efficiency for top speed — it deliberately weakens the motor's magnetic field at high RPM. On this board it's a bounded, reversible control loop, verified parameter by parameter.</p></details>
+    <details class="guide-item"><summary>VESC / D100S</summary><p>VESC is an open-source motor-controller platform; the D100S is a controller built around it, sized to drop into the factory mounting pattern. It replaces the proprietary EFOC 2.0 as the Stage 1 brain.</p></details>
+    <details class="guide-item"><summary>Sag</summary><p>Voltage drop under load. A healthy pack holds its voltage when you pull amps; an aged or imbalanced one dips — and the controller reads that dip as lost performance. This project's forensics work exists because of sag.</p></details>
+    <details class="guide-item"><summary>P50B / 21700-40T</summary><p>Cell model numbers. P50B is a Molicel high-discharge cell; the stock pack uses Samsung 21700-40T cells. Cell choice sets the pack's voltage ceiling, current ceiling, and how gracefully it sags.</p></details>
+    <details class="guide-item"><summary>BLE bridge</summary><p>Bluetooth Low Energy link. The ambition is a small nRF52840 module that translates between the Phaze remote's protocol and the new controller — keeping the stock remote alive through the conversion.</p></details>
   </div>
 </section>
 

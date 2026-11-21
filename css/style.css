@@ -299,3 +299,13 @@ code{font-family:var(--mono);font-size:.88em;background:#1c1c22;padding:.1em .35
 .lg--rest{background:#4a4a55}.lg--load{background:var(--red)}
 .sag__note{margin-left:auto;color:#6a6a72;text-transform:none;letter-spacing:.04em}
 @media(max-width:560px){.sag__note{display:none}}
+
+/* ---------- field guide ---------- */
+.guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;max-width:1100px}
+.guide-item{border:1px solid var(--line);border-radius:8px;background:var(--panel);overflow:hidden}
+.guide-item summary{cursor:pointer;padding:16px 20px;font-weight:700;font-size:14.5px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.guide-item summary::after{content:"+";font-family:var(--mono);color:var(--red);font-size:18px;transition:transform .2s;flex-shrink:0}
+.guide-item[open] summary::after{transform:rotate(45deg)}
+.guide-item summary::-webkit-details-marker{display:none}
+.guide-item p{margin:0;padding:0 20px 18px;color:var(--dim);font-size:14px;line-height:1.6}
+@media(max-width:560px){.guide-grid{grid-template-columns:1fr}}
