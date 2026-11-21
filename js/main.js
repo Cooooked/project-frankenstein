@@ -79,7 +79,7 @@
   function renderCells(key) {
     var c = ARR[key];
     cellGrid.innerHTML = '';
-    cellGrid.style.setProperty('--cols', c.s);
+    cellGrid.style.setProperty('--cols', c.p);
     for (var i = 0; i < c.s; i++) {
       var row = document.createElement('div');
       row.className = 'cellrow';
