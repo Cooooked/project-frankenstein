@@ -124,7 +124,11 @@
 
   var TL_KEY = 'pf-tl-filter';
   function applyTlFilter(chip) {
-    tlChips.forEach(function (c) { c.classList.toggle('is-active', c === chip); });
+    tlChips.forEach(function (c) {
+      var on = c === chip;
+      c.classList.toggle('is-active', on);
+      c.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
     var f = chip.dataset.f;
     tlItems.forEach(function (li) {
       li.hidden = f !== 'all' && li.dataset.status !== f;
