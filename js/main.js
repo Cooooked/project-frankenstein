@@ -225,7 +225,7 @@
       '<button class="lb-nav lb-prev" aria-label="Previous image">‹</button>' +
       '<figure class="lb-figure"><img alt=""><figcaption></figcaption></figure>' +
       '<button class="lb-nav lb-next" aria-label="Next image">›</button>' +
-      '<div class="lb-count mono"></div>';
+      '<div class="lb-count mono" role="status" aria-live="polite"></div>';
     document.body.appendChild(lb);
     var lbImg = lb.querySelector('img'), lbCap = lb.querySelector('figcaption'), lbCount = lb.querySelector('.lb-count');
     var lbIdx = 0, lbOpen = false, lbTrigger = null;
