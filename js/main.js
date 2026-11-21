@@ -154,7 +154,7 @@
       lbCap.textContent = src.alt;
       lbCount.textContent = (lbIdx + 1) + ' / ' + lightboxImgs.length;
     }
-    function open(i) { show(i); lb.classList.add('open'); lbOpen = true; document.body.style.overflow = 'hidden'; }
+    function open(i) { show(i); lb.classList.add('open'); lbOpen = true; document.body.style.overflow = 'hidden'; lb.querySelector('.lb-close').focus(); }
     function close() { lb.classList.remove('open'); lbOpen = false; document.body.style.overflow = ''; }
 
     lightboxImgs.forEach(function (img, i) {
@@ -165,6 +165,13 @@
     lb.querySelector('.lb-prev').addEventListener('click', function () { show(lbIdx - 1); });
     lb.querySelector('.lb-next').addEventListener('click', function () { show(lbIdx + 1); });
     lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+    // swipe left/right on touch devices
+    var tx = 0, ty = 0;
+    lb.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+    lb.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+      if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) show(lbIdx + (dx < 0 ? 1 : -1));
+    }, { passive: true });
     document.addEventListener('keydown', function (e) {
       if (!lbOpen) return;
       if (e.key === 'Escape') close();
