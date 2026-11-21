@@ -185,7 +185,7 @@
       '<div class="lb-count mono"></div>';
     document.body.appendChild(lb);
     var lbImg = lb.querySelector('img'), lbCap = lb.querySelector('figcaption'), lbCount = lb.querySelector('.lb-count');
-    var lbIdx = 0, lbOpen = false;
+    var lbIdx = 0, lbOpen = false, lbTrigger = null;
 
     function show(i) {
       lbIdx = (i + lightboxImgs.length) % lightboxImgs.length;
@@ -194,8 +194,8 @@
       lbCap.textContent = src.alt;
       lbCount.textContent = (lbIdx + 1) + ' / ' + lightboxImgs.length;
     }
-    function open(i) { show(i); lb.classList.add('open'); lbOpen = true; document.body.style.overflow = 'hidden'; lb.querySelector('.lb-close').focus(); }
-    function close() { lb.classList.remove('open'); lbOpen = false; document.body.style.overflow = ''; }
+    function open(i) { show(i); lbTrigger = lightboxImgs[i]; lb.classList.add('open'); lbOpen = true; document.body.style.overflow = 'hidden'; lb.querySelector('.lb-close').focus(); }
+    function close() { lb.classList.remove('open'); lbOpen = false; document.body.style.overflow = ''; if (lbTrigger) lbTrigger.focus(); }
 
     lightboxImgs.forEach(function (img, i) {
       img.style.cursor = 'zoom-in';
