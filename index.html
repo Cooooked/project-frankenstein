@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Project Frankenstein — Evolve Diablo Carbon Engineering</title>
 <meta name="description" content="Project Frankenstein: engineering log of an Evolve Diablo Carbon — performance experimentation, controller and battery engineering, and a planned reversible high-voltage conversion.">
+<meta property="og:title" content="Project Frankenstein — Evolve Diablo Carbon Engineering">
+<meta property="og:description" content="A stock Evolve Diablo Carbon, taken apart at the engineering level — reversible high-voltage conversion on the bench.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://cooooked.github.io/project-frankenstein/assets/og-card.png">
 <link rel="icon" href="assets/logo.webp" type="image/webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -227,6 +231,28 @@
       <img src="assets/chassis-wiring.webp" alt="Spare chassis interior wiring" loading="lazy">
       <p class="stage__caption">Spare carbon chassis — the Stage 1 donor. Factory mounts preserved for a clean swap.</p>
     </div>
+  </div>
+
+  <div class="voltage reveal">
+    <div class="voltage__head">
+      <h3>The voltage story</h3>
+      <p>Same 48 cells. Different arrangement. The ceiling moves — everything else stays reversible.</p>
+    </div>
+    <div class="voltage__grid">
+      <div class="vcol">
+        <span class="vcol__tag">12S4P · STOCK</span>
+        <div class="vbar"><span class="vbar__k">Nominal</span><div class="vbar__track"><i style="--w:64%"></i></div><b>43.2 V</b></div>
+        <div class="vbar"><span class="vbar__k">Peak</span><div class="vbar__track"><i style="--w:75%"></i></div><b>50.4 V</b></div>
+        <div class="vbar"><span class="vbar__k">Observed top</span><div class="vbar__track"><i style="--w:70%;background:var(--dim)"></i></div><b>~70 km/h</b></div>
+      </div>
+      <div class="vcol vcol--hot">
+        <span class="vcol__tag">16S3P · FRANKENSTEIN</span>
+        <div class="vbar"><span class="vbar__k">Nominal</span><div class="vbar__track"><i style="--w:86%"></i></div><b>57.6 V</b></div>
+        <div class="vbar"><span class="vbar__k">Peak</span><div class="vbar__track"><i style="--w:100%"></i></div><b>67.2 V</b></div>
+        <div class="vbar"><span class="vbar__k">Projected top</span><div class="vbar__track"><i style="--w:0%;background:repeating-linear-gradient(45deg,var(--red-dim) 0 6px,#3a0d0b 6px 12px)"></i></div><b>unverified</b></div>
+      </div>
+    </div>
+    <p class="voltage__note">Observed figures are configuration-specific. The 16S speed projection is deliberately unverified — no number is claimed until the pack is built and measured.</p>
   </div>
 
   <div class="reversible reveal">
