@@ -411,3 +411,5 @@ main img[loading="lazy"]:focus-visible{outline:2px solid var(--red);outline-offs
 .tl-p.active{background:var(--red)}
 .tl-p.planned{background:#3a3a44}
 .tl-progress-note{font-size:10.5px;letter-spacing:.08em;color:var(--dim);margin:0 0 18px;text-transform:uppercase}
+button.status{width:100%;text-align:left;font-family:inherit;color:inherit;cursor:pointer;appearance:none}
+button.status:hover{border-color:#4a4a52}

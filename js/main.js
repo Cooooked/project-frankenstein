@@ -69,6 +69,18 @@
     });
   });
 
+  // Status cards jump to the timeline filtered to that state
+  document.querySelectorAll('.status[data-goto-status]').forEach(function (card) {
+    card.addEventListener('click', function () {
+      var chip = Array.prototype.find.call(tlChips, function (c) { return c.dataset.f === card.dataset.gotoStatus; });
+      if (chip) {
+        applyTlFilter(chip);
+        try { localStorage.setItem(TL_KEY, chip.dataset.f); } catch (e) {}
+        document.getElementById('log').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
   // Field guide expand/collapse all
   var ga = document.getElementById('guideAll');
   var gn = document.getElementById('guideNone');

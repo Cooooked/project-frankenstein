@@ -465,23 +465,23 @@
     no proposed spec is dressed up as completed hardware.</p>
   </div>
   <div class="statusgrid reveal">
-    <div class="status status--done"><h3>Verified working</h3>
+    <button class="status status--done" type="button" data-goto-status="done" title="Filter the log to completed work"><h3>Verified working</h3>
       <ul><li>Custom mobile tuning &amp; telemetry tooling</li>
       <li>Field-weakening limits mapped and safely applied</li>
       <li>Desktop diagnostic suite (live hardware)</li>
-      <li>Battery sag forensics &amp; fault monitoring</li></ul></div>
-    <div class="status status--active"><h3>In progress</h3>
+      <li>Battery sag forensics &amp; fault monitoring</li></ul></button>
+    <button class="status status--active" type="button" data-goto-status="active" title="Filter the log to active work"><h3>In progress</h3>
       <ul><li>12S pack cell-group repair (at technician)</li>
       <li>nRF52840 BLE bridge development</li>
-      <li>Stage 1 mechanical design &amp; looms</li></ul></div>
-    <div class="status status--prop"><h3>Proposed, not built</h3>
+      <li>Stage 1 mechanical design &amp; looms</li></ul></button>
+    <button class="status status--prop" type="button" data-goto-status="planned" title="Filter the log to planned work"><h3>Proposed, not built</h3>
       <ul><li>16S3P Molicel P50B pack (design agreed)</li>
       <li>D100S VESC drop-in (mount designed)</li>
-      <li>Phaze-remote-over-bridge compatibility</li></ul></div>
+      <li>Phaze-remote-over-bridge compatibility</li></ul></button>
     <div class="status status--unv"><h3>Unverified / open</h3>
       <ul><li>Motor KV measurement (needed for speed projections)</li>
       <li>16S real-world top speed &amp; thermal envelope</li>
-      <li>P60C cell upgrade path (~12+ months out)</li></ul></div>
+      <li>P60C cell upgrade path (~12+ months out)</li></ul></button>
   </div>
   <div class="checklist reveal" id="checklist">
     <div class="checklist__head">
