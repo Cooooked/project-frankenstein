@@ -290,3 +290,12 @@ code{font-family:var(--mono);font-size:.88em;background:#1c1c22;padding:.1em .35
 .hcard h4{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;margin:0 0 10px}
 .hcard p{color:var(--dim);font-size:13.5px;margin:0;line-height:1.55}
 @media(max-width:560px){.horizon{padding:22px 18px}}
+
+/* ---------- sag chart ---------- */
+.sag{margin:26px 0;border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:18px 18px 12px}
+.sag canvas{width:100%;height:180px;display:block}
+.sag__legend{display:flex;gap:22px;align-items:center;margin-top:10px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.sag__legend i{display:inline-block;width:18px;height:3px;margin-right:7px;vertical-align:middle}
+.lg--rest{background:#4a4a55}.lg--load{background:var(--red)}
+.sag__note{margin-left:auto;color:#6a6a72;text-transform:none;letter-spacing:.04em}
+@media(max-width:560px){.sag__note{display:none}}

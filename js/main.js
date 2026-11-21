@@ -172,3 +172,82 @@
       if (e.key === 'ArrowRight') show(lbIdx + 1);
     });
   }
+
+  // Battery sag chart — illustrative rest-vs-load cell group voltages
+  (function () {
+    var cv = document.getElementById('sagChart');
+    if (!cv || !cv.getContext) return;
+    var ctx = cv.getContext('2d');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var groups = 12;
+    // resting ~3.62-3.68V flat; loaded: group 7 dips hard, neighbours slightly
+    var rest = [], load = [];
+    for (var i = 0; i < groups; i++) {
+      rest.push(3.62 + ((i * 37) % 10) / 100);
+      var dip = i === 6 ? 0.31 : (i === 5 || i === 7 ? 0.08 : 0.015 + ((i * 13) % 7) / 100);
+      load.push(rest[i] - dip);
+    }
+    var t = 0, raf = 0, drawn = false;
+    function size() {
+      var r = cv.getBoundingClientRect();
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.round(r.width * dpr);
+      cv.height = Math.round(180 * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    size();
+    window.addEventListener('resize', function () { size(); draw(performance.now()); });
+    function draw(now) {
+      var w = cv.getBoundingClientRect().width, h = 180;
+      ctx.clearRect(0, 0, w, h);
+      var padL = 34, padR = 10, padT = 14, padB = 22;
+      var iw = w - padL - padR, ih = h - padT - padB;
+      var vMin = 3.1, vMax = 3.75;
+      function Y(v) { return padT + (1 - (v - vMin) / (vMax - vMin)) * ih; }
+      function X(i) { return padL + (i + 0.5) * (iw / groups); }
+      // gridlines + y labels
+      ctx.font = '9px Consolas, monospace';
+      ctx.fillStyle = '#6a6a72'; ctx.strokeStyle = '#2a2a30'; ctx.lineWidth = 1;
+      [3.2, 3.4, 3.6].forEach(function (v) {
+        ctx.beginPath(); ctx.moveTo(padL, Y(v)); ctx.lineTo(w - padR, Y(v)); ctx.stroke();
+        ctx.fillText(v.toFixed(1) + 'V', 4, Y(v) + 3);
+      });
+      // x labels
+      for (var i = 0; i < groups; i++) {
+        ctx.fillText('G' + (i + 1), X(i) - 8, h - 6);
+      }
+      function series(vals, color, reveal) {
+        ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.beginPath();
+        vals.forEach(function (v, i) {
+          var px = X(i), py = Y(v);
+          // reveal: draw up to reveal fraction of groups
+          if (i / groups <= reveal) { if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py); }
+        });
+        ctx.stroke();
+        vals.forEach(function (v, i) {
+          if (i / groups <= reveal) {
+            ctx.fillStyle = color;
+            ctx.beginPath(); ctx.arc(X(i), Y(v), 2.4, 0, Math.PI * 2); ctx.fill();
+          }
+        });
+      }
+      var reveal = reduce ? 1 : Math.min(1, (now - t0) / 1400);
+      series(rest, '#4a4a55', 1);
+      series(load, '#e10600', reveal);
+      // annotate the dip once revealed
+      if (reveal > 0.9) {
+        ctx.fillStyle = '#e10600'; ctx.font = '9.5px Consolas, monospace';
+        ctx.fillText('sag', X(6) + 6, Y(load[6]) - 6);
+      }
+      if (!reduce && reveal < 1) raf = requestAnimationFrame(function (n) { draw(n); });
+      else drawn = true;
+    }
+    var t0 = performance.now();
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) {
+        en.forEach(function (e) {
+          if (e.isIntersecting && !drawn) { t0 = performance.now() - (reduce ? 1400 : 0); draw(performance.now()); }
+        });
+      }).observe(cv);
+    } else { draw(performance.now()); }
+  })();
