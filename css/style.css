@@ -234,3 +234,10 @@ code{font-family:var(--mono);font-size:.88em;background:#1c1c22;padding:.1em .35
 .vcol--hot .vbar b{color:var(--red)}
 .voltage__note{margin-top:26px;font-family:var(--mono);font-size:11px;color:#6a6a72;letter-spacing:.04em;border-top:1px solid var(--line);padding-top:18px}
 @media(max-width:760px){.voltage__grid{grid-template-columns:1fr}.vbar{grid-template-columns:70px 1fr 80px}}
+
+/* ---------- config toggle ---------- */
+.cfg-toggle{display:inline-flex;gap:0;margin-bottom:18px;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.cfg-btn{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--panel);color:var(--dim);border:0;padding:10px 20px;cursor:pointer;transition:all .2s}
+.cfg-btn.is-active{background:var(--red);color:#fff}
+.cfg-btn:not(.is-active):hover{color:var(--ink)}
+.cfg-note{font-size:10.5px;letter-spacing:.1em;color:#6a6a72;margin-left:14px;align-self:center}

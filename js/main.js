@@ -41,3 +41,17 @@
     revealEls.forEach(function (el) { el.classList.add('in'); });
   }
 })();
+
+  // Config toggle: stock donor vs planned Frankenstein spec
+  var cfgBtns = document.querySelectorAll('.cfg-btn');
+  var cfgNote = document.getElementById('cfgNote');
+  cfgBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      cfgBtns.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+      var cfg = btn.dataset.cfg;
+      document.querySelectorAll('#specGrid .spec').forEach(function (el) {
+        el.querySelector('.spec__v').textContent = el.dataset[cfg];
+      });
+      if (cfgNote) cfgNote.textContent = cfg === 'stock' ? 'as found' : 'planned — not yet built';
+    });
+  });

@@ -92,13 +92,18 @@
       <figcaption>The hybrid board next to the spare carbon Diablo chassis prepared for Stage 1.</figcaption>
     </figure>
     <div class="split__body">
-      <div class="spec-grid reveal">
-        <div class="spec"><span class="spec__k">Battery</span><span class="spec__v">12S4P · Samsung 21700-40T · 16 Ah</span></div>
-        <div class="spec"><span class="spec__k">Motors</span><span class="spec__v">Dual 6374-class outrunners</span></div>
-        <div class="spec"><span class="spec__k">Controller</span><span class="spec__v">Evolve EFOC 2.0</span></div>
-        <div class="spec"><span class="spec__k">Remote</span><span class="spec__v">Evolve Phaze</span></div>
-        <div class="spec"><span class="spec__k">Gearing</span><span class="spec__v">16T pinion · 32T wheel · ~107 mm poly</span></div>
-        <div class="spec"><span class="spec__k">Observed</span><span class="spec__v">~70 km/h stock · ~78 km/h field-weakened</span></div>
+      <div class="cfg-toggle reveal" role="group" aria-label="Configuration view">
+        <button class="cfg-btn is-active" data-cfg="stock" type="button">Stock board</button>
+        <button class="cfg-btn" data-cfg="frank" type="button">Frankenstein spec</button>
+        <span class="cfg-note mono" id="cfgNote">as found</span>
+      </div>
+      <div class="spec-grid reveal" id="specGrid">
+        <div class="spec" data-stock="12S4P · Samsung 21700-40T · 16 Ah" data-frank="16S3P · Molicel P50B · 48 cells"><span class="spec__k">Battery</span><span class="spec__v">12S4P · Samsung 21700-40T · 16 Ah</span></div>
+        <div class="spec" data-stock="Dual 6374-class outrunners" data-frank="Dual 6374-class outrunners · retained"><span class="spec__k">Motors</span><span class="spec__v">Dual 6374-class outrunners</span></div>
+        <div class="spec" data-stock="Evolve EFOC 2.0" data-frank="MakerX D100S · VESC"><span class="spec__k">Controller</span><span class="spec__v">Evolve EFOC 2.0</span></div>
+        <div class="spec" data-stock="Evolve Phaze" data-frank="Phaze via BLE bridge · research"><span class="spec__k">Remote</span><span class="spec__v">Evolve Phaze</span></div>
+        <div class="spec" data-stock="16T pinion · 32T wheel · ~107 mm poly" data-frank="16T pinion · 32T wheel · ~107 mm poly · unchanged"><span class="spec__k">Gearing</span><span class="spec__v">16T pinion · 32T wheel · ~107 mm poly</span></div>
+        <div class="spec" data-stock="~70 km/h stock · ~78 km/h field-weakened" data-frank="unverified — no number until built"><span class="spec__k">Observed</span><span class="spec__v">~70 km/h stock · ~78 km/h field-weakened</span></div>
       </div>
       <p class="reveal">The board arrived already unusual: a factory one-off hybrid — Diablo controller
       internals and 3500&nbsp;W motors grafted into a Hadean battery enclosure, with custom BMS firmware
