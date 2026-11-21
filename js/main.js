@@ -452,15 +452,26 @@
       heatEl.style.color = fw < 0.5 ? '' : '#e10600';
     }
     function syncOut() { if (outEl) outEl.textContent = dial.value + '%'; }
+    function syncPresets() {
+      document.querySelectorAll('.fw-preset').forEach(function (b) {
+        var on = +b.dataset.fw === +dial.value;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+    }
     dial.addEventListener('input', function () {
-      document.querySelectorAll('.fw-preset').forEach(function (b) { b.classList.toggle('is-active', +b.dataset.fw === +dial.value); });
+      syncPresets();
       syncOut();
       draw();
     });
     document.querySelectorAll('.fw-preset').forEach(function (b) {
       b.addEventListener('click', function () {
         dial.value = b.dataset.fw;
-        document.querySelectorAll('.fw-preset').forEach(function (x) { x.classList.toggle('is-active', x === b); });
+        document.querySelectorAll('.fw-preset').forEach(function (x) {
+        var on = x === b;
+        x.classList.toggle('is-active', on);
+        x.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
         syncOut();
         draw();
       });
