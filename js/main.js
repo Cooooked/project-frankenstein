@@ -111,14 +111,17 @@
         if (!en.isIntersecting) return;
         statIO.unobserve(en.target);
         var el = en.target;
-        var numMatch = el.textContent.match(/[\d.]+/);
+        var raw = el.textContent;
+        var numMatch = raw.match(/[\d.]+/);
         if (!numMatch) return;
+        var prefix = raw.slice(0, numMatch.index);
+        var suffix = raw.slice(numMatch.index + numMatch[0].length);
         var end = parseFloat(numMatch[0]), dec = numMatch[0].includes('.') ? 1 : 0;
         var t0 = performance.now(), dur = 1100;
         function tick(now) {
           var p = Math.min(1, (now - t0) / dur);
           var eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = (end * eased).toFixed(dec);
+          el.textContent = prefix + (end * eased).toFixed(dec) + suffix;
           if (p < 1) requestAnimationFrame(tick);
         }
         requestAnimationFrame(tick);
