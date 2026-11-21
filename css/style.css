@@ -343,3 +343,8 @@ code{font-family:var(--mono);font-size:.88em;background:#1c1c22;padding:.1em .35
 .checklist__bar i{display:block;height:100%;width:0;background:var(--red);transition:width .4s cubic-bezier(.2,.8,.2,1)}
 .checklist.done .checklist__head .mono{color:#4a9e6b}
 @media(max-width:560px){.checklist{padding:22px 18px}}
+
+/* ---------- spec sheet copy ---------- */
+.spec-copy{display:inline-block;margin:14px 0 0;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:transparent;border:1px solid var(--line);border-radius:6px;padding:8px 14px;cursor:pointer;transition:color .15s,border-color .15s}
+.spec-copy:hover{color:var(--ink);border-color:#4a4a52}
+.spec-copy.is-done{color:#4a9e6b;border-color:#2c5a3a}

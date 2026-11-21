@@ -385,3 +385,35 @@
     });
     update();
   })();
+
+  // Copy spec sheet — dumps the current toggle state as plain text
+  (function () {
+    var btn = document.getElementById('specCopy');
+    var grid = document.getElementById('specGrid');
+    var cfg = document.getElementById('cfgNote');
+    if (!btn || !grid) return;
+    btn.addEventListener('click', function () {
+      var side = (cfg && cfg.textContent.trim() === 'as found') ? 'stock' : 'frank';
+      var lines = ['PROJECT FRANKENSTEIN — SPEC SHEET (' + side.toUpperCase() + ')', ''];
+      grid.querySelectorAll('.spec').forEach(function (sp) {
+        var k = sp.querySelector('.spec__k');
+        var v = sp.querySelector('.spec__v');
+        if (k && v) lines.push(k.textContent.trim() + ': ' + v.textContent.trim());
+      });
+      lines.push('', 'cooooked.github.io/project-frankenstein');
+      var text = lines.join('\n');
+      function done() {
+        btn.classList.add('is-done'); btn.textContent = 'Copied';
+        setTimeout(function () { btn.classList.remove('is-done'); btn.textContent = 'Copy spec sheet'; }, 1600);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+      } else fallback();
+      function fallback() {
+        var ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        ta.remove();
+      }
+    });
+  })();
