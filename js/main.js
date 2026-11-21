@@ -257,6 +257,24 @@
         });
       }).observe(cv);
     } else { draw(performance.now()); }
+
+    // hover tooltip — rest vs load voltage per cell group
+    var wrap = document.getElementById('sagWrap');
+    var tip = document.getElementById('sagTip');
+    if (wrap && tip && wrap.addEventListener) {
+      wrap.addEventListener('mousemove', function (e) {
+        var r = cv.getBoundingClientRect();
+        var w = r.width, h = 180;
+        var padL = 34, padR = 10, iw = w - padL - padR;
+        var fx = (e.clientX - r.left - padL) / iw; // 0..1 across groups
+        var gi = Math.round(fx * groups - 0.5);
+        if (gi < 0 || gi >= groups) { tip.hidden = true; return; }
+        tip.hidden = false;
+        tip.style.left = ((gi + 0.5) / groups * 100) + '%';
+        tip.textContent = 'G' + (gi + 1) + '  rest ' + rest[gi].toFixed(2) + 'V  →  load ' + load[gi].toFixed(2) + 'V';
+      });
+      wrap.addEventListener('mouseleave', function () { tip.hidden = true; });
+    }
   })();
 
   // Scroll-spy: highlight the nav link for the section in view

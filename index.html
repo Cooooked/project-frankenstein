@@ -193,7 +193,8 @@
         <li>The remote's battery display has a hard ceiling above 65.5&nbsp;V — a genuine design
         constraint any 16S conversion must respect.</li>
       </ul>
-      <div class="sag reveal">
+      <div class="sag reveal" id="sagWrap">
+        <div class="sag-tip mono" id="sagTip" hidden></div>
         <canvas id="sagChart" height="180" aria-label="Illustrative chart: cell group voltages at rest versus under load"></canvas>
         <div class="sag__legend mono">
           <span><i class="lg lg--rest"></i>at rest</span>
