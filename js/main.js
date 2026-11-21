@@ -2,6 +2,18 @@
 (function () {
   'use strict';
 
+  // Back-to-top
+  var toTop = document.getElementById('toTop');
+  function onScrollTop() {
+    if (!toTop) return;
+    toTop.classList.toggle('show', window.scrollY > 700);
+  }
+  window.addEventListener('scroll', onScrollTop, { passive: true });
+  onScrollTop();
+  if (toTop) toTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
   // Nav: scrolled state + mobile menu
   var nav = document.getElementById('nav');
   var toggle = document.getElementById('navToggle');
