@@ -223,7 +223,7 @@
     lb.setAttribute('aria-label', 'Image viewer');
     lb.innerHTML = '<button class="lb-close" aria-label="Close">×</button>' +
       '<button class="lb-nav lb-prev" aria-label="Previous image">‹</button>' +
-      '<figure class="lb-figure"><img alt=""><figcaption></figcaption></figure>' +
+      '<figure class="lb-figure"><img alt="" hidden><figcaption></figcaption></figure>' +
       '<button class="lb-nav lb-next" aria-label="Next image">›</button>' +
       '<div class="lb-count mono" role="status" aria-live="polite"></div>';
     document.body.appendChild(lb);
@@ -233,6 +233,7 @@
     function show(i) {
       lbIdx = (i + lightboxImgs.length) % lightboxImgs.length;
       var src = lightboxImgs[lbIdx];
+      lbImg.hidden = false;
       lbImg.src = src.src; lbImg.alt = src.alt;
       lbCap.textContent = src.alt;
       lbCount.textContent = (lbIdx + 1) + ' / ' + lightboxImgs.length;
@@ -616,7 +617,7 @@
         if (!n.nodeValue || !n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
         var p = n.parentElement;
         while (p && p !== document.body) {
-          if (p === guide || SKIP[p.tagName]) return NodeFilter.FILTER_REJECT;
+          if (p === guide || SKIP[p.tagName] || (p.classList && p.classList.contains('ticker'))) return NodeFilter.FILTER_REJECT;
           p = p.parentElement;
         }
         return NodeFilter.FILTER_ACCEPT;
@@ -625,24 +626,29 @@
     var nodes = [];
     while (walker.nextNode()) nodes.push(walker.currentNode);
     nodes.forEach(function (node) {
-      if (made >= MAX) return;
-      var text = node.nodeValue;
-      TERMS.forEach(function (pair) {
-        if (made >= MAX) return;
-        pair[0].lastIndex = 0;
-        var m = pair[0].exec(text);
-        if (!m) return;
+      var curNode = node;
+      while (made < MAX && curNode && curNode.nodeValue) {
+        var text = curNode.nodeValue;
+        var best = null;
+        TERMS.forEach(function (pair) {
+          pair[0].lastIndex = 0;
+          var m = pair[0].exec(text);
+          if (m && (!best || m.index < best.m.index)) best = { m: m, tip: pair[1] };
+        });
+        if (!best) break;
+        var m = best.m;
         var span = document.createElement('span');
         span.className = 'jterm';
         span.tabIndex = 0;
-        span.dataset.tip = pair[1];
+        span.dataset.tip = best.tip;
         span.textContent = m[0];
         var rest = document.createTextNode(text.slice(m.index + m[0].length));
-        var after = node.nextSibling;
-        node.nodeValue = text.slice(0, m.index);
-        node.parentNode.insertBefore(span, after);
-        node.parentNode.insertBefore(rest, after);
+        var after = curNode.nextSibling;
+        curNode.nodeValue = text.slice(0, m.index);
+        curNode.parentNode.insertBefore(span, after);
+        curNode.parentNode.insertBefore(rest, after);
+        curNode = rest;
         made++;
-      });
+      }
     });
   })();
