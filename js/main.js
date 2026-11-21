@@ -51,11 +51,16 @@
 })();
 
   // Config toggle: stock donor vs planned Frankenstein spec
-  var cfgBtns = document.querySelectorAll('.cfg-btn');
+  var cfgBtns = document.querySelectorAll('.cfg-btn[data-cfg]');
+  cfgBtns.forEach(function (b) { b.setAttribute('aria-pressed', b.classList.contains('is-active') ? 'true' : 'false'); });
   var cfgNote = document.getElementById('cfgNote');
   cfgBtns.forEach(function (btn) {
     btn.addEventListener('click', function () {
-      cfgBtns.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+      cfgBtns.forEach(function (b) {
+        var on = b === btn;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
       var cfg = btn.dataset.cfg;
       document.querySelectorAll('#specGrid .spec').forEach(function (el) {
         el.querySelector('.spec__v').textContent = el.dataset[cfg];
@@ -138,7 +143,11 @@
   renderCells('12s4p');
   document.querySelectorAll('.cellmap .cfg-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      document.querySelectorAll('.cellmap .cfg-btn').forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+      document.querySelectorAll('.cellmap .cfg-btn').forEach(function (b) {
+        var on = b === btn;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
       renderCells(btn.dataset.arr);
     });
   });

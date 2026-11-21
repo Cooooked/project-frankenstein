@@ -112,8 +112,8 @@
     </figure>
     <div class="split__body">
       <div class="cfg-toggle reveal" role="group" aria-label="Configuration view">
-        <button class="cfg-btn is-active" data-cfg="stock" type="button">Stock board</button>
-        <button class="cfg-btn" data-cfg="frank" type="button">Frankenstein spec</button>
+        <button class="cfg-btn is-active" data-cfg="stock" type="button" aria-pressed="true">Stock board</button>
+        <button class="cfg-btn" data-cfg="frank" type="button" aria-pressed="false">Frankenstein spec</button>
         <span class="cfg-note mono" id="cfgNote">as found</span>
       </div>
       <button class="spec-copy" id="specCopy" type="button">Copy spec sheet</button>
@@ -317,8 +317,8 @@
     <div class="cellmap reveal">
       <div class="cellmap__head">
         <div class="cfg-toggle" role="group" aria-label="Cell arrangement">
-          <button class="cfg-btn is-active" data-arr="12s4p" type="button">12S4P · stock</button>
-          <button class="cfg-btn" data-arr="16s3p" type="button">16S3P · planned</button>
+          <button class="cfg-btn is-active" data-arr="12s4p" type="button" aria-pressed="true">12S4P · stock</button>
+          <button class="cfg-btn" data-arr="16s3p" type="button" aria-pressed="false">16S3P · planned</button>
         </div>
         <span class="cellmap__read mono" id="cellmapRead" role="status" aria-live="polite">12 series × 4 parallel — 43.2 V nominal</span>
       </div>
