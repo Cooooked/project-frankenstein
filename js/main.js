@@ -67,15 +67,27 @@
   // Timeline filters
   var tlChips = document.querySelectorAll('.tl-chip');
   var tlItems = document.querySelectorAll('.timeline__item');
+  var TL_KEY = 'pf-tl-filter';
+  function applyTlFilter(chip) {
+    tlChips.forEach(function (c) { c.classList.toggle('is-active', c === chip); });
+    var f = chip.dataset.f;
+    tlItems.forEach(function (li) {
+      li.hidden = f !== 'all' && li.dataset.status !== f;
+    });
+  }
   tlChips.forEach(function (chip) {
     chip.addEventListener('click', function () {
-      tlChips.forEach(function (c) { c.classList.toggle('is-active', c === chip); });
-      var f = chip.dataset.f;
-      tlItems.forEach(function (li) {
-        li.hidden = f !== 'all' && li.dataset.status !== f;
-      });
+      applyTlFilter(chip);
+      try { localStorage.setItem(TL_KEY, chip.dataset.f); } catch (e) {}
     });
   });
+  try {
+    var saved = localStorage.getItem(TL_KEY);
+    if (saved) {
+      var match = Array.prototype.find.call(tlChips, function (c) { return c.dataset.f === saved; });
+      if (match) applyTlFilter(match);
+    }
+  } catch (e) {}
 
   // Cell arrangement map: 48 cells as series groups × parallel strings
   var cellGrid = document.getElementById('cellmapGrid');
