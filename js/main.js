@@ -129,3 +129,46 @@
     }, { threshold: 0.6 });
     heroStats.forEach(function (el) { statIO.observe(el); });
   }
+
+  // Photo lightbox — click any content image to view it large
+  var lightboxImgs = Array.prototype.slice.call(document.querySelectorAll('main img[loading="lazy"]'));
+  if (lightboxImgs.length) {
+    var lb = document.createElement('div');
+    lb.className = 'lightbox';
+    lb.setAttribute('role', 'dialog');
+    lb.setAttribute('aria-modal', 'true');
+    lb.setAttribute('aria-label', 'Image viewer');
+    lb.innerHTML = '<button class="lb-close" aria-label="Close">×</button>' +
+      '<button class="lb-nav lb-prev" aria-label="Previous image">‹</button>' +
+      '<figure class="lb-figure"><img alt=""><figcaption></figcaption></figure>' +
+      '<button class="lb-nav lb-next" aria-label="Next image">›</button>' +
+      '<div class="lb-count mono"></div>';
+    document.body.appendChild(lb);
+    var lbImg = lb.querySelector('img'), lbCap = lb.querySelector('figcaption'), lbCount = lb.querySelector('.lb-count');
+    var lbIdx = 0, lbOpen = false;
+
+    function show(i) {
+      lbIdx = (i + lightboxImgs.length) % lightboxImgs.length;
+      var src = lightboxImgs[lbIdx];
+      lbImg.src = src.src; lbImg.alt = src.alt;
+      lbCap.textContent = src.alt;
+      lbCount.textContent = (lbIdx + 1) + ' / ' + lightboxImgs.length;
+    }
+    function open(i) { show(i); lb.classList.add('open'); lbOpen = true; document.body.style.overflow = 'hidden'; }
+    function close() { lb.classList.remove('open'); lbOpen = false; document.body.style.overflow = ''; }
+
+    lightboxImgs.forEach(function (img, i) {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', function () { open(i); });
+    });
+    lb.querySelector('.lb-close').addEventListener('click', close);
+    lb.querySelector('.lb-prev').addEventListener('click', function () { show(lbIdx - 1); });
+    lb.querySelector('.lb-next').addEventListener('click', function () { show(lbIdx + 1); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (!lbOpen) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') show(lbIdx - 1);
+      if (e.key === 'ArrowRight') show(lbIdx + 1);
+    });
+  }
