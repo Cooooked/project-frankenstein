@@ -253,7 +253,7 @@
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (en) {
         en.forEach(function (e) {
-          if (e.isIntersecting && !drawn) { t0 = performance.now() - (reduce ? 1400 : 0); draw(performance.now()); }
+          if (e.isIntersecting && !drawn) { size(); t0 = performance.now() - (reduce ? 1400 : 0); draw(performance.now()); }
         });
       }).observe(cv);
     } else { draw(performance.now()); }
@@ -375,7 +375,7 @@
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (en) {
         en.forEach(function (e) {
-          if (e.isIntersecting && !started) { started = true; draw(); }
+          if (e.isIntersecting && !started) { started = true; size(); draw(); }
         });
       }).observe(cv);
     } else draw();
