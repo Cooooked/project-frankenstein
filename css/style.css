@@ -391,3 +391,7 @@ code{font-family:var(--mono);font-size:.88em;background:#1c1c22;padding:.1em .35
 /* render-perf: skip offscreen sections */
 main > section:not(.hero){content-visibility:auto;contain-intrinsic-size:auto 900px}
 @media(prefers-reduced-motion:no-preference){main > section:not(.hero){contain-intrinsic-size:auto 900px}}
+
+/* inline jargon terms */
+.jterm{border-bottom:1px dotted var(--dim);cursor:help}
+.jterm:focus-visible{outline:2px solid var(--red);outline-radius:2px}

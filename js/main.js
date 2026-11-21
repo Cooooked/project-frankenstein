@@ -465,3 +465,54 @@
     pEl.addEventListener('input', update);
     update();
   })();
+
+  // Inline jargon tooltips — dotted terms explain themselves on hover/focus
+  (function () {
+    var TERMS = [
+      [/\b12S4P\b/g, '12S4P — 12 cell groups in series, 4 in parallel. Series sets voltage; parallel sets capacity.'],
+      [/\b16S3P\b/g, '16S3P — the planned arrangement: 16 in series for +33% voltage, 3 in parallel.'],
+      [/\bfield weakening\b/gi, 'Field weakening — a bounded, reversible controller technique that trades efficiency for top speed.'],
+      [/\bVESC\b/g, 'VESC — open-source motor-controller platform; the D100S is built around it.'],
+      [/\bD100S\b/g, 'D100S — a VESC-based controller sized for the factory mounting pattern.'],
+      [/\bP50B\b/g, 'P50B — Molicel high-discharge cell chosen for the Stage 1 pack.'],
+      [/\bBLE bridge\b/gi, 'BLE bridge — a small Bluetooth link meant to keep the Phaze remote working through the conversion.'],
+      [/\bsag\b/gi, 'Sag — voltage drop under load. The reason this project exists.']
+    ];
+    var SKIP = { GUIDE: true, SCRIPT: true, STYLE: true, CANVAS: true, DETAILS: true, BUTTON: true, A: true, SUMMARY: true, CODE: true, PRE: true };
+    var guide = document.getElementById('guide');
+    var made = 0, MAX = 14;
+    var walker = document.createTreeWalker(document.querySelector('main'), NodeFilter.SHOW_TEXT, {
+      acceptNode: function (n) {
+        if (!n.nodeValue || !n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        var p = n.parentElement;
+        while (p && p !== document.body) {
+          if (p === guide || SKIP[p.tagName]) return NodeFilter.FILTER_REJECT;
+          p = p.parentElement;
+        }
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(function (node) {
+      if (made >= MAX) return;
+      var text = node.nodeValue;
+      TERMS.forEach(function (pair) {
+        if (made >= MAX) return;
+        pair[0].lastIndex = 0;
+        var m = pair[0].exec(text);
+        if (!m) return;
+        var span = document.createElement('span');
+        span.className = 'jterm';
+        span.tabIndex = 0;
+        span.title = pair[1];
+        span.textContent = m[0];
+        var rest = document.createTextNode(text.slice(m.index + m[0].length));
+        node.parentNode.insertBefore(span, node);
+        node.parentNode.insertBefore(rest, span.nextSibling ? span.nextSibling : null);
+        // node keeps the prefix text
+        node.nodeValue = text.slice(0, m.index);
+        made++;
+      });
+    });
+  })();
