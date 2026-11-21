@@ -378,3 +378,12 @@ code{font-family:var(--mono);font-size:.88em;background:#1c1c22;padding:.1em .35
 /* sag chart tooltip */
 .sag{position:relative}
 .sag-tip{position:absolute;top:8px;pointer-events:none;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-size:10.5px;color:var(--ink);white-space:nowrap;transform:translateX(-50%);z-index:3;box-shadow:0 6px 16px rgba(0,0,0,.5)}
+
+/* status key legend */
+.status-key{display:flex;flex-wrap:wrap;gap:8px 22px;margin:-8px 0 26px;font-size:10.5px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase}
+.status-key span{display:inline-flex;align-items:center;gap:8px}
+.key-dot{width:9px;height:9px;border-radius:2px;display:inline-block}
+.key--done{background:#5ee08a}
+.key--active{background:#ff8a80}
+.key--prop{background:#e8c96a}
+.key--unv{background:#9a9aa2}
