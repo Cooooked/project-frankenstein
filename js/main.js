@@ -78,6 +78,15 @@
   // Timeline filters
   var tlChips = document.querySelectorAll('.tl-chip');
   var tlItems = document.querySelectorAll('.timeline__item');
+  // show entry counts on filter chips
+  var counts = {};
+  tlItems.forEach(function (li) { counts[li.dataset.status] = (counts[li.dataset.status] || 0) + 1; });
+  tlChips.forEach(function (chip) {
+    var f = chip.dataset.f;
+    var n = f === 'all' ? tlItems.length : (counts[f] || 0);
+    chip.textContent = chip.textContent.replace(/\s*\(\d+\)$/, '') + ' (' + n + ')';
+  });
+
   var TL_KEY = 'pf-tl-filter';
   function applyTlFilter(chip) {
     tlChips.forEach(function (c) { c.classList.toggle('is-active', c === chip); });
