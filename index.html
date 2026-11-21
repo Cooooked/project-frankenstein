@@ -356,6 +356,12 @@
       <div class="fw__dial">
         <label class="ctl"><span class="ctl-label">Field weakening <output id="fwOut">0%</output></span>
           <input type="range" id="fwDial" min="0" max="100" value="0" step="1"></label>
+        <div class="fw__presets" role="group" aria-label="Field weakening presets">
+          <button class="fw-preset is-active" data-fw="0" type="button">Economy</button>
+          <button class="fw-preset" data-fw="35" type="button">Cruise</button>
+          <button class="fw-preset" data-fw="70" type="button">Attack</button>
+          <button class="fw-preset" data-fw="100" type="button">Limit</button>
+        </div>
         <div class="fw__reads mono" aria-live="polite">
           <span>TOP SPEED <b id="fwSpeed">baseline</b></span>
           <span>EFFICIENCY <b id="fwEff">100%</b></span>

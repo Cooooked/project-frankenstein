@@ -395,3 +395,7 @@ main > section:not(.hero){content-visibility:auto;contain-intrinsic-size:auto 90
 /* inline jargon terms */
 .jterm{border-bottom:1px dotted var(--dim);cursor:help}
 .jterm:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.fw__presets{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.fw-preset{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);background:transparent;border:1px solid var(--line);border-radius:5px;padding:6px 12px;cursor:pointer;transition:color .15s,border-color .15s}
+.fw-preset:hover{color:var(--ink);border-color:#4a4a52}
+.fw-preset.is-active{color:var(--red);border-color:var(--red)}
