@@ -382,6 +382,7 @@
     if (!dial || !cv || !cv.getContext) return;
     var ctx = cv.getContext('2d');
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var outEl = document.getElementById('fwOut');
     var speedEl = document.getElementById('fwSpeed');
     var effEl = document.getElementById('fwEff');
     var heatEl = document.getElementById('fwHeat');
@@ -450,14 +451,17 @@
       heatEl.textContent = fw < 0.15 ? 'low' : fw < 0.5 ? 'moderate' : fw < 0.8 ? 'high' : 'severe';
       heatEl.style.color = fw < 0.5 ? '' : '#e10600';
     }
+    function syncOut() { if (outEl) outEl.textContent = dial.value + '%'; }
     dial.addEventListener('input', function () {
       document.querySelectorAll('.fw-preset').forEach(function (b) { b.classList.toggle('is-active', +b.dataset.fw === +dial.value); });
+      syncOut();
       draw();
     });
     document.querySelectorAll('.fw-preset').forEach(function (b) {
       b.addEventListener('click', function () {
         dial.value = b.dataset.fw;
         document.querySelectorAll('.fw-preset').forEach(function (x) { x.classList.toggle('is-active', x === b); });
+        syncOut();
         draw();
       });
     });
