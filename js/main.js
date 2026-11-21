@@ -64,6 +64,17 @@
     });
   });
 
+  // Field guide expand/collapse all
+  var ga = document.getElementById('guideAll');
+  var gn = document.getElementById('guideNone');
+  var guideItems = document.querySelectorAll('.guide-item');
+  if (ga) ga.addEventListener('click', function () {
+    guideItems.forEach(function (d) { d.open = true; });
+  });
+  if (gn) gn.addEventListener('click', function () {
+    guideItems.forEach(function (d) { d.open = false; });
+  });
+
   // Timeline filters
   var tlChips = document.querySelectorAll('.tl-chip');
   var tlItems = document.querySelectorAll('.timeline__item');
