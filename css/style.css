@@ -372,3 +372,5 @@ code{font-family:var(--mono);font-size:.88em;background:#1c1c22;padding:.1em .35
 .packcalc__note{margin:16px 0 0;font-family:var(--mono);font-size:10px;color:#6a6a72;letter-spacing:.04em}
 @media(max-width:760px){.packcalc__body{grid-template-columns:1fr}}
 @media(max-width:560px){.packcalc{padding:20px 16px}}
+
+/* visually-hidden helper for live regions is unnecessary — role=status suffices */

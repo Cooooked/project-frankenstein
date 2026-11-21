@@ -309,7 +309,7 @@
           <button class="cfg-btn is-active" data-arr="12s4p" type="button">12S4P · stock</button>
           <button class="cfg-btn" data-arr="16s3p" type="button">16S3P · planned</button>
         </div>
-        <span class="cellmap__read mono" id="cellmapRead">12 series × 4 parallel — 43.2 V nominal</span>
+        <span class="cellmap__read mono" id="cellmapRead" role="status" aria-live="polite">12 series × 4 parallel — 43.2 V nominal</span>
       </div>
       <div class="cellmap__grid" id="cellmapGrid" role="img" aria-label="Cell arrangement diagram"></div>
       <p class="cellmap__note">Same 48 cells, different topology — series count sets voltage, parallel count sets capacity and sag.</p>
@@ -349,7 +349,7 @@
       <div class="fw__dial">
         <label class="ctl"><span class="ctl-label">Field weakening <output id="fwOut">0%</output></span>
           <input type="range" id="fwDial" min="0" max="100" value="0" step="1"></label>
-        <div class="fw__reads mono">
+        <div class="fw__reads mono" aria-live="polite">
           <span>TOP SPEED <b id="fwSpeed">baseline</b></span>
           <span>EFFICIENCY <b id="fwEff">100%</b></span>
           <span>HEAT <b id="fwHeat">low</b></span>
