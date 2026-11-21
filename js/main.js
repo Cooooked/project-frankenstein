@@ -351,7 +351,7 @@
     var wrap = document.getElementById('sagWrap');
     var tip = document.getElementById('sagTip');
     if (wrap && tip && wrap.addEventListener) {
-      wrap.addEventListener('mousemove', function (e) {
+      wrap.addEventListener('pointermove', function (e) {
         var r = cv.getBoundingClientRect();
         var w = r.width, h = 180;
         var padL = 34, padR = 10, iw = w - padL - padR;
@@ -362,7 +362,11 @@
         tip.style.left = ((gi + 0.5) / groups * 100) + '%';
         tip.textContent = 'G' + (gi + 1) + '  rest ' + rest[gi].toFixed(2) + 'V  →  load ' + load[gi].toFixed(2) + 'V';
       });
-      wrap.addEventListener('mouseleave', function () { tip.hidden = true; });
+      wrap.addEventListener('pointerleave', function () { tip.hidden = true; });
+      wrap.addEventListener('pointerdown', function (e) {
+        // touch: show the tooltip under the finger without needing hover
+        wrap.dispatchEvent(new PointerEvent('pointermove', { clientX: e.clientX, clientY: e.clientY, bubbles: true }));
+      });
     }
   })();
 
